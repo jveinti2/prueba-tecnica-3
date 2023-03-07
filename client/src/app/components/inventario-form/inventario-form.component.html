@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col s6">
+        <div class="form-control">
+            <h4>Formulario de productos</h4>
+            <div class="form-check form-switch">
+                <input (change)="existente = !existente" name="nuevaRef" class="form-check-input" type="checkbox"
+                    role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Referencia existente </label>
+            </div>
+            <hr>
+            <div>
+                <form *ngIf="existente !== true" action="">
+                    <div class="mb-3">
+                        <label for="">Referencia</label>
+                        <input [(ngModel)]="producto.id_ref" name="ref" type="text" class="form-control"
+                            id="exampleFormControlInput1" placeholder="124312">
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Nombre</label>
+                        <input [(ngModel)]="producto.nombre" name="nombre" type="text" class="form-control"
+                            id="exampleFormControlInput1" placeholder="Camisa de hombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Detalle</label>
+                        <input [(ngModel)]="producto.detalle" name="detalle" type="text" class="form-control"
+                            id="exampleFormControlInput1" placeholder="Una camisa genial">
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Imagen</label>
+                        <input [(ngModel)]="producto.imagen" name="imagen" type="text" class="form-control"
+                            id="exampleFormControlInput1" placeholder="http://www.urldelaimagen.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Precio</label>
+                        <input [(ngModel)]="producto.precio" name="precio" type="text" class="form-control"
+                            id="exampleFormControlInput1" placeholder="50000">
+                    </div>
+                    <button (click)="createOne(producto)" class="btn btn-primary">Añadir referencia</button>
+                </form>
+                <form *ngIf="existente !== false" action="">
+                    <div class="mb-3">
+                        <label for="">Referencia</label>
+                        <select [(ngModel)]="producto.id_ref" name="id_ref"  class="form-select" aria-label="Default select example">
+                            <option selected>Selecione una referencia existente</option>
+                            <option *ngFor="let producto_existente of productos_existentes"
+                                [value]="producto_existente.id_ref">
+                                {{producto_existente.id_ref}}
+                            </option>
+                        </select>                        
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Cantidad a agregar </label>
+                        <input [(ngModel)]="producto.cantidad" name="cantidad" type="number" class="form-control"
+                            id="exampleFormControlInput1">
+                    </div>
+                    <button (click)="updateOne(producto)" class="btn btn-primary">Añadir referencia</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col s6">
+        <div *ngIf="existente !== true" class="card">
+            <img [src]="producto.imagen" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"> {{producto.nombre}} </h5>
+                <p class="card-text">REFERENCIA: {{producto.id_ref}} </p>
+                <p class="card-text"> {{producto.detalle}} </p>
+                <p>
+                    <button type="submit" class="btn">
+                        Stock disponible <span class="badge text-bg-primary"> </span>
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
